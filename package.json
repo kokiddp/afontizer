@@ -1,13 +1,13 @@
 {
   "name": "afontizer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Download Adobe TypeKit Fonts for local provisioning",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "gfontizer": "./index.js"
+    "afontizer": "./index.js"
   },
   "repository": {
     "type": "git",
