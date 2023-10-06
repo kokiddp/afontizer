@@ -112,6 +112,9 @@ function formatCss(cssText) {
   // Remove any trailing spaces
   cssText = cssText.replace(/  \n/g, '\n');
 
+  // Remove the spaces from the last line
+  cssText = cssText.replace(/  $/g, '');
+  
   return cssText;
 }
 

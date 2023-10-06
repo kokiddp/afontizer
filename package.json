@@ -1,6 +1,6 @@
 {
   "name": "afontizer",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Download Adobe TypeKit Fonts for local provisioning",
   "main": "index.js",
   "scripts": {
