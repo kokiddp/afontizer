@@ -103,8 +103,14 @@ function formatCss(cssText) {
   // Remove the leading spaces before the @font-face block
   cssText = cssText.replace(/\n  @font-face/g, '\n@font-face');
 
+  // Remove the leading spaces before the first @font-face block
+  cssText = cssText.replace(/  @font-face/g, '\n@font-face');
+
   // Remove the leading spaces before the closing brace
   cssText = cssText.replace(/\n  }/g, '\n}');
+
+  // Remove any trailing spaces
+  cssText = cssText.replace(/  \n/g, '\n');
 
   return cssText;
 }

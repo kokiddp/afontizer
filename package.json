@@ -1,6 +1,6 @@
 {
   "name": "afontizer",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Download Adobe TypeKit Fonts for local provisioning",
   "main": "index.js",
   "scripts": {
@@ -14,13 +14,15 @@
     "url": "git+https://github.com/kokiddp/gafontizer.git"
   },
   "keywords": [
-    "gfonts",
+    "afonts",
     "fonts",
     "sage",
     "scss",
-    "google",
+    "adobe",
     "fonts",
-    "googlefonts",
+    "adobefonts",
+    "typekit",
+    "typekitfonts",
     "wordpress"
   ],
   "author": {
