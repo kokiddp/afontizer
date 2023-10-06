@@ -8,11 +8,12 @@ GFontizer is a simple Node.js script to download Adobee TypeKit Fonts for local 
 - Generates a CSS file with updated `@font-face` rules
 - Removes comments from the CSS file
 - Replaces single quotes with double quotes in the CSS file
+- Format CSS output file
 - Handles multiple fonts and font weights
 
 ## Installation
 
-You can install GFontizer via npm:
+You can install AFontizer via npm:
 
 ```sh
 npm install afontizer
@@ -29,7 +30,7 @@ afontizer "https://use.typekit.net/bcf3gcu.css"
 By default, fonts will be downloaded to `./resources/assets/fonts/` and the CSS will be written to `./resources/assets/styles/common/_afonts.scss`. You can specify different paths as the second and third arguments:
 
 ```sh
-afontizer "https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" "./my-fonts/" "./styles/_afonts.scss"
+afontizer "https://use.typekit.net/bcf3gcu.css" "./my-fonts/" "./styles/_afonts.scss"
 ```
 
 ## License

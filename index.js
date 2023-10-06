@@ -4,6 +4,7 @@ const fs = require('fs');
 const axios = require('axios');
 const path = require('path');
 const urlModule = require('url');
+//const beautify = require('jsbeautify');
 
 const cssUrl = process.argv[2] || null;
 const destinationFolder = process.argv[3] || './resources/assets/fonts/';
@@ -50,17 +51,10 @@ const downloadFontsAndCreateStylesheet = async (
     // Remove all the non-woff2 font URLs
     combinedCssText = combinedCssText.replace(/,url\("[^"]+"\)\sformat\("woff"\)[^;]*|,url\("[^"]+"\)\sformat\("opentype"\)[^;]*/g, '');
 
-    // Replace all single quotes with double quotes
-    combinedCssText = combinedCssText.replace(/'/g, '"');
-
-    // Replace all multiple newlines with a single newline
-    combinedCssText = combinedCssText.replace(/\n{2,}/g, '\n');
-
-    // Remove the leading newline
-    combinedCssText = combinedCssText.trimStart();
+    combinedCssText = formatCss(combinedCssText);
 
     // Add a newline before each @font-face except the first
-    combinedCssText = combinedCssText.split('@font-face').join('\n@font-face').replace('\n', '');
+    //combinedCssText = combinedCssText.split('@font-face').join('\n@font-face').replace('\n', '');
 
     // Ensure the destination folder for the CSS file exists
     fs.mkdirSync(path.dirname(cssOutputPath), { recursive: true });
@@ -72,5 +66,47 @@ const downloadFontsAndCreateStylesheet = async (
     console.error(error);
   }
 };
+
+function formatCss(cssText) {
+  // Replace all single quotes with double quotes
+  cssText = cssText.replace(/'/g, '"');
+
+  // Splitting directives into new lines
+  cssText = cssText.replace(/;/g, ';\n')
+
+  // Adding newline after opening brace and before closing brace
+  cssText = cssText.replace(/{/g, '{\n  ');
+  cssText = cssText.replace(/}/g, '\n}');
+
+  // Removing indent from the lines with braces
+  cssText = cssText.replace(/  {/g, '{');
+  cssText = cssText.replace(/  }/g, '}');
+
+  // Adding a space after colon
+  cssText = cssText.replace(/:/g, ': ');
+
+  // Remove trailing whitespaces
+  cssText = cssText.replace(/\s+$/gm, '');
+  
+  // Replace all multiple newlines with a single newline
+  cssText = cssText.replace(/\n{2,}/g, '\n');
+
+  // Add a newline after closing brace
+  cssText = cssText.replace(/}/g, '}\n');
+
+  // Remove the leading newline
+  cssText = cssText.trimStart();
+
+  // Format the css with a 2-spaces indent
+  cssText = cssText.split('\n').map(line => '  ' + line).join('\n');
+
+  // Remove the leading spaces before the @font-face block
+  cssText = cssText.replace(/\n  @font-face/g, '\n@font-face');
+
+  // Remove the leading spaces before the closing brace
+  cssText = cssText.replace(/\n  }/g, '\n}');
+
+  return cssText;
+}
 
 downloadFontsAndCreateStylesheet(cssUrl, destinationFolder, cssOutputPath);
